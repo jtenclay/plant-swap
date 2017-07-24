@@ -12,4 +12,5 @@ class ApplicationController < Sinatra::Base
 		content_type :json
 		pass
 	end
+
 end

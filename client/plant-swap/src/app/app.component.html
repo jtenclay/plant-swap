@@ -1,7 +1,14 @@
 <nav>
   <p>nav bar</p>
   <p *ngIf="loggedIn">logged in as {{loggedInUser}}</p>
-  <p *ngIf="!loggedIn">not logged in</p>
+  <p *ngIf="!loggedIn" (click)="showLoginModal()">Login</p>
 </nav>
 
 <router-outlet></router-outlet>
+
+<div *ngIf="loginModalToggle">
+  <p>login modal</p>
+  <input [(ngModel)]="userDetails.username" placeholder="Username"/>
+  <input [(ngModel)]="userDetails.password" placeholder="Password"/>
+  <button (click)="login()">Submit</button>
+</div>
