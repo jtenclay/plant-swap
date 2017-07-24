@@ -53,7 +53,6 @@ export class DetailComponent {
 			this.thisUser = response.json().user;
 			this.tags = response.json().tags;
 			this.comments = response.json().comments;
-			console.log(response.json().comments);
 	  }, err => {
 			alert("error");
     })
@@ -66,10 +65,10 @@ export class DetailComponent {
   postComment() {
   	this.newComment.user_id = parseInt(window.localStorage.id);
   	this.newComment.swap_id = this.id;
-  	console.log(this.newComment);
   	this.http.post('http://localhost:9393/comments?token=' + window.localStorage.token, this.newComment).subscribe(response => {
       this.comments = response.json();
-      console.log(response.json());
+      this.newComment.message = "";
+      this.addCommentToggle = false;
     }, err => {
     	alert("error");
     })

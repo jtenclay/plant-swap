@@ -1,5 +1,6 @@
 <nav>
-  <p>nav bar</p>
+  <p>Plant Swap</p>
+  <p><a routerLink="/swaps">Open Swaps</a></p>
   <p *ngIf="loggedIn">logged in as {{loggedInUser}}</p>
   <p *ngIf="!loggedIn" (click)="showLoginModal()">Login</p>
 </nav>

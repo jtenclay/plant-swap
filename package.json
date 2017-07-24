@@ -1,0 +1,27 @@
+{
+  "name": "plant-swap",
+  "version": "1.0.0",
+  "description": "~ ~ ~",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
+    "gulp-watch": "^4.3.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtenclay/plant-swap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jtenclay/plant-swap/issues"
+  },
+  "homepage": "https://github.com/jtenclay/plant-swap#readme"
+}

@@ -10,9 +10,6 @@ import { DetailComponent } from './detail/detail.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [{
-	path: 'browse',
-	component: ListComponent
-}, {
   path: 'swaps',
   component: ListComponent
 }, {
@@ -39,4 +36,6 @@ const routes: Routes = [{
   providers: [],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule { }
