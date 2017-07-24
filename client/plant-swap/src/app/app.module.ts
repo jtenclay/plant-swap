@@ -13,6 +13,9 @@ const routes: Routes = [{
 	path: 'browse',
 	component: ListComponent
 }, {
+  path: 'swaps',
+  component: ListComponent
+}, {
 	path: '',
 	component: HomeComponent
 }, {

@@ -18,6 +18,13 @@ class User {
 	username: string;
 }
 
+class Comment {
+	id: number;
+	swap_id: number;
+	message: string;
+	user_id: number;
+}
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -25,14 +32,19 @@ class User {
 })
 export class DetailComponent {
 
-	swap: Swap;
-	thisUser: User;
+	loggedIn: boolean;
+	swap: Swap = new Swap;
+	thisUser: User = new User;
 	tags = [];
-	comments = [];
+	comments: Comment[] = [];
+	addCommentToggle: boolean = false;
+	newComment: Comment = new Comment();
+	id: number;
 
   constructor(private route: ActivatedRoute, private http: Http) {
-  	let id = this.route.snapshot.params.id;
-  	this.getSwap(id);
+  	this.id = this.route.snapshot.params.id;
+  	this.getSwap(this.id);
+  	this.loggedIn = window.localStorage.loggedIn
   }
 
   getSwap(id) {
@@ -41,8 +53,26 @@ export class DetailComponent {
 			this.thisUser = response.json().user;
 			this.tags = response.json().tags;
 			this.comments = response.json().comments;
+			console.log(response.json().comments);
 	  }, err => {
 			alert("error");
     })
   }
+
+  showAddComment() {
+  	this.addCommentToggle = true;
+  }
+
+  postComment() {
+  	this.newComment.user_id = parseInt(window.localStorage.id);
+  	this.newComment.swap_id = this.id;
+  	console.log(this.newComment);
+  	this.http.post('http://localhost:9393/comments?token=' + window.localStorage.token, this.newComment).subscribe(response => {
+      this.comments = response.json();
+      console.log(response.json());
+    }, err => {
+    	alert("error");
+    })
+  }
+
 }

@@ -9,3 +9,14 @@
 	<div *ngFor="let comment of comments">{{comment.comment.message}}<br>
 		by {{comment.user.username}}</div>
 </div>
+<div *ngIf="loggedIn">
+	<button *ngIf="!addCommentToggle" (click)="showAddComment()">Add Comment</button>
+	<div *ngIf="addCommentToggle">
+		add comment form
+		<textarea [(ngModel)]="newComment.message" placeholder="Write your comment..."></textarea>
+	  <button (click)="postComment()">Submit</button>
+	</div>
+</div>
+<div *ngIf="!loggedIn">
+	<p>You must log in to post comments.</p>
+</div>

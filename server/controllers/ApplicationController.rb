@@ -9,6 +9,7 @@ class ApplicationController < Sinatra::Base
 	# fires before any route
 	before do
 		response['Access-Control-Allow-Origin'] = '*'
+		p "hello"
 		content_type :json
 		pass
 	end

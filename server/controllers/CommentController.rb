@@ -4,7 +4,14 @@ class CommentController < ApplicationController
     request_body = JSON.parse(request.body.read)
     comment = Comment.new(request_body)
     comment.save
-    Comment.all.to_json
+    swap_id = comment.swap_id
+    swap = Swap.find(swap_id)
+    comments = swap.comments
+    modifiedComments = []
+    comments.each do |comment|
+      modifiedComments << {comment: comment, user: comment.user}
+    end
+    modifiedComments.to_json
   end
 
   patch '/:id' do

@@ -9,7 +9,7 @@ import { Http, Response } from '@angular/http';
 export class AppComponent {
 
 	loggedInUser;
-	loggedIn;
+	loggedIn: boolean;
 	loginModalToggle: boolean = false;
 	userDetails = {username: "", password: ""};
 
@@ -31,6 +31,7 @@ export class AppComponent {
       window.localStorage.setItem("loggedIn", "true");
       window.localStorage.setItem("username", response.json().username);
       window.localStorage.setItem("token", response.json().token);
+      window.localStorage.setItem("id", response.json().id);
       this.refreshFromLocalStorage();
     }, err => {
       alert("error");

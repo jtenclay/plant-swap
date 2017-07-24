@@ -39,4 +39,5 @@ export class ListComponent {
   goToDetail(swap) {
 		this.router.navigate(['/swaps', swap.swap.id])
   }
+
 }
