@@ -3,9 +3,12 @@
 </div>
 <div id="swaps-list">
 	<div *ngFor="let swap of swaps" (click)="goToDetail(swap)">
-		<img src="{{swap.image_url}}">
-		<p>{{swap.title}} by {{swap.username}}</p>
-		<p>{{swap.description}}</p>
-		<p>open? {{swap.is_open}}</p>
+		<img src="{{swap.swap.image_url}}">
+		<p>{{swap.swap.title}} by {{swap.user.username}}</p>
+		<p>{{swap.swap.description}}</p>
+		<p>open? {{swap.swap.is_open}}</p>
+		<ul>
+			<li *ngFor="let tag of swap.tags">{{tag.name}}</li>
+		</ul>
 	</div>
 </div>

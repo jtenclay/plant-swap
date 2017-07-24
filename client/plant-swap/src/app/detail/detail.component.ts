@@ -27,6 +27,8 @@ export class DetailComponent {
 
 	swap: Swap;
 	thisUser: User;
+	tags = [];
+	comments = [];
 
   constructor(private route: ActivatedRoute, private http: Http) {
   	let id = this.route.snapshot.params.id;
@@ -37,6 +39,8 @@ export class DetailComponent {
   	this.http.get('http://localhost:9393/swaps/' + id + "?token=" + window.localStorage.token).subscribe(response => {
 			this.swap = response.json().swap;
 			this.thisUser = response.json().user;
+			this.tags = response.json().tags;
+			this.comments = response.json().comments;
 	  }, err => {
 			alert("error");
     })

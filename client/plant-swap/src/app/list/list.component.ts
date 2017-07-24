@@ -37,6 +37,6 @@ export class ListComponent {
   }
 
   goToDetail(swap) {
-		this.router.navigate(['/swaps', swap.swap_id])
+		this.router.navigate(['/swaps', swap.swap.id])
   }
 }
