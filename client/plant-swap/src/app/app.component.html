@@ -1,5 +1,7 @@
 <nav>
   <p>nav bar</p>
+  <p *ngIf="loggedIn">logged in as {{loggedInUser}}</p>
+  <p *ngIf="!loggedIn">not logged in</p>
 </nav>
 
 <router-outlet></router-outlet>

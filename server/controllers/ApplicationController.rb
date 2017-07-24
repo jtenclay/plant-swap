@@ -10,16 +10,6 @@ class ApplicationController < Sinatra::Base
 	before do
 		response['Access-Control-Allow-Origin'] = '*'
 		content_type :json
-		# path = request.fullpath.split("?")[0]
-		# if ["/users/register", "/users/login"].include? path || request.request_method == "OPTIONS"
-		# 	pass
-		# end
-		# token = params[:token]
-		# user = User.find_by(token: token)
-		# if user
-		# 	pass
-		# else
-		# 	halt 403
-		# end
+		pass
 	end
 end

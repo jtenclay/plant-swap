@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+	loggedInUser
+	loggedIn
+
+	constructor() {
+		this.loggedInUser = window.localStorage.username
+		this.loggedIn = window.localStorage.loggedIn
+	}
+
 }

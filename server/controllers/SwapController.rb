@@ -6,20 +6,30 @@ class SwapController < ApplicationController
     swaps.each do |swap|
       modifiedSwaps << {swap: swap, user: swap.user, tags: swap.tags}
     end
-    modifiedSwaps.to_json
+    token = params[:token]
+    user = User.find_by(token: token)
+    if user
+      loggedInUser = user
+    end
+    {swaps: modifiedSwaps, loggedInUser: loggedInUser}.to_json
   end
 
   get '/:id' do
     id = params[:id]
     swap = Swap.find(id)
-    user = swap.user
+    itsUser = swap.user
     tags = swap.tags
     comments = swap.comments
     modifiedComments = []
     comments.each do |comment|
       modifiedComments << {comment: comment, user: comment.user}
     end
-    {swap: swap, user: user, tags: tags, comments: modifiedComments}.to_json
+    token = params[:token]
+    user = User.find_by(token: token)
+    if user
+      loggedInUser = user
+    end
+    {swap: swap, user: itsUser, tags: tags, comments: modifiedComments, loggedInUser: loggedInUser}.to_json
   end
 
   post '/' do
