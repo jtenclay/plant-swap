@@ -2,6 +2,11 @@ require 'SecureRandom'
 
 class UserController < ApplicationController
 
+  get '/' do
+    users = User.all
+    users.to_json
+  end
+
   post '/register' do
     response['Access-Control-Allow-Origin'] = '*'
     content_type :json
