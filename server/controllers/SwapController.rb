@@ -19,13 +19,20 @@ class SwapController < ApplicationController
     swap = Swap.find(id)
     itsUser = swap.user
     tags = swap.tags
+    token = params[:token]
+    user = User.find_by(token: token)
     comments = swap.comments
     modifiedComments = []
     comments.each do |comment|
-      modifiedComments << {comment: comment, user: comment.user}
+      # weed out private responses unless it belongs to the accessing user
+      if comment.private
+        if (comment.user_id == user.id || itsUser.id == user.id)
+          modifiedComments << {comment: comment, user: comment.user}
+        end
+      else
+        modifiedComments << {comment: comment, user: comment.user}
+      end
     end
-    token = params[:token]
-    user = User.find_by(token: token)
     if user
       loggedInUser = user
     end

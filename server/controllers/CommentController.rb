@@ -4,12 +4,21 @@ class CommentController < ApplicationController
     request_body = JSON.parse(request.body.read)
     comment = Comment.new(request_body)
     comment.save
+    token = params[:token]
+    user = User.find_by(token: token)
     swap_id = comment.swap_id
     swap = Swap.find(swap_id)
     comments = swap.comments
     modifiedComments = []
     comments.each do |comment|
-      modifiedComments << {comment: comment, user: comment.user}
+      # weed out private responses unless it belongs to the accessing user
+      if comment.private
+        if (comment.user_id == user.id || swap.user_id == user.id)
+          modifiedComments << {comment: comment, user: comment.user}
+        end
+      else
+        modifiedComments << {comment: comment, user: comment.user}
+      end
     end
     modifiedComments.to_json
   end
