@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../data.service';
 
 class Swap {
 	id: number;
@@ -42,7 +43,7 @@ export class DetailComponent {
 	newComment: Comment = new Comment();
 	id: number;
 
-  constructor(private route: ActivatedRoute, private http: Http) {
+  constructor(private route: ActivatedRoute, private http: Http, private dataService: DataService) {
   	this.id = this.route.snapshot.params.id;
   	this.getSwap(this.id);
   	this.loggedIn = window.localStorage.loggedIn

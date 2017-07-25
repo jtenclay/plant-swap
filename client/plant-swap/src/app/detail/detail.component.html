@@ -9,7 +9,7 @@
 	<div *ngFor="let comment of comments">{{comment.comment.message}}<br>
 		by {{comment.user.username}}</div>
 </div>
-<div *ngIf="loggedIn">
+<div *ngIf="dataService.loggedIn">
 	<button *ngIf="!addCommentToggle" (click)="showAddComment()">Add Comment</button>
 	<div *ngIf="addCommentToggle">
 		add comment form
@@ -17,6 +17,6 @@
 	  <button (click)="postComment()">Submit</button>
 	</div>
 </div>
-<div *ngIf="!loggedIn">
+<div *ngIf="!dataService.loggedIn">
 	<p>You must log in to post comments.</p>
 </div>

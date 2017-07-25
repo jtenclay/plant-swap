@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { DataService } from './data.service';
 
 class User {
 	id: number;
@@ -14,8 +15,6 @@ class User {
 })
 export class AppComponent {
 
-	loggedInUser;
-	loggedIn: boolean;
 	loggedInState: any = true
 	loginRegisterToggle: boolean = false;
 	loginModalToggle: boolean = false;
@@ -24,13 +23,8 @@ export class AppComponent {
 	loginClass: string = 'active';
 	registerClass: string = '';
 
-	constructor(private http: Http) {
-		this.refreshFromLocalStorage();
-	}
-
-	refreshFromLocalStorage() {
-		this.loggedInUser = window.localStorage.username
-		this.loggedIn = window.localStorage.loggedIn
+	constructor(private http: Http, private dataService: DataService) {
+		
 	}
 
 	showLoginModal() {
@@ -43,7 +37,8 @@ export class AppComponent {
       window.localStorage.setItem("username", response.json().username);
       window.localStorage.setItem("token", response.json().token);
       window.localStorage.setItem("id", response.json().id);
-      this.refreshFromLocalStorage();
+      this.dataService.loggedIn = true;
+      this.dataService.loggedInUser = response.json().username;
     }, err => {
       alert("error");
     })
@@ -56,7 +51,8 @@ export class AppComponent {
       window.localStorage.setItem("username", response.json().username);
       window.localStorage.setItem("token", response.json().token);
       window.localStorage.setItem("id", response.json().id);
-      this.refreshFromLocalStorage();
+      this.dataService.loggedIn = true;
+      this.dataService.loggedInUser = response.json().username;
     }, err => {
       alert("error");
     })
