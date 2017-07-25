@@ -27,26 +27,13 @@ export class AppComponent {
 		
 	}
 
-	showLoginModal() {
+	showLoginModal($event) {
+		$event.preventDefault()
 		this.loginModalToggle = true;
 	}
 
-	login() {
-    this.http.post('http://localhost:9393/users/login', this.userDetails).subscribe(response => {
-      window.localStorage.setItem("loggedIn", "true");
-      window.localStorage.setItem("username", response.json().username);
-      window.localStorage.setItem("token", response.json().token);
-      window.localStorage.setItem("id", response.json().id);
-      this.dataService.loggedIn = true;
-      this.dataService.loggedInUser = response.json().username;
-    }, err => {
-      alert("error");
-    })
-    this.loginModalToggle = false;
-	}
-
-	register() {
-    this.http.post('http://localhost:9393/users/register', this.registerDetails).subscribe(response => {
+	loginOrRegister(loginOrRegister) {
+		this.http.post('http://localhost:9393/users/' + loginOrRegister, this.userDetails).subscribe(response => {
       window.localStorage.setItem("loggedIn", "true");
       window.localStorage.setItem("username", response.json().username);
       window.localStorage.setItem("token", response.json().token);

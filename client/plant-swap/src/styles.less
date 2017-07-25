@@ -1,8 +1,31 @@
+@import (inline) "normalize.css";
+
 @background-color: beige;
 @text-color: black;
 
 body {
+	margin: 1rem;
 	background-color: @background-color;
+	#body-wrapper {
+		max-width: 60rem;
+		margin: 0 auto;
+	}
+}
+
+nav {
+	max-width: 60rem;
+	margin: 0 auto;
+	div {
+		float: right;
+	}
+	p {
+		float: left;
+	}
+	&:after {
+		content: "";
+  	display: table;
+  	clear: both;
+	}
 }
 
 #login-register-wrapper {

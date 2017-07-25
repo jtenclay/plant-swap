@@ -1,26 +1,28 @@
 <nav>
-  <p>Plant Swap</p>
-  <p><a routerLink="/swaps">Open Swaps</a></p>
-  <p *ngIf="dataService.loggedIn">logged in as {{loggedInUser}}</p>
-  <p *ngIf="!dataService.loggedIn" (click)="showLoginModal()">Login</p>
+  <p><a routerLink="/">Plant Swap</a></p>
+  <div>
+    <p><a routerLink="/swaps">Open Swaps</a></p>
+    <p *ngIf="dataService.loggedIn"><a routerLink="/account">My Account</a></p>
+    <p *ngIf="!dataService.loggedIn"><a href="#" (click)="showLoginModal($event)">Login</a></p>
+  </div>
 </nav>
-
-<router-outlet></router-outlet>
-
+<div id="body-wrapper">
+  <router-outlet></router-outlet>
+</div>
 <div *ngIf="loginModalToggle" id="login-register-wrapper">
   <div id="login-register-toggle-wrapper">
     <p (click)="toggleLoginRegister($event)" [ngClass]="loginClass">Log in</p>
-    <p (click)="toggleLoginRegister($event)" [ngClass]="registerClass">Register</p>
+    <p (click)="toggleLoginRegister($event)" [ngClass]="registerClass">Sign up</p>
   </div>
   <div [ngClass]="loginClass">
     <input [(ngModel)]="userDetails.username" placeholder="Username"/>
     <input [(ngModel)]="userDetails.password" placeholder="Password"/>
-    <button (click)="login()">Log in</button>
+    <button (click)="loginOrRegister('login')">Log in</button>
   </div>
   <div [ngClass]="registerClass">
     <input [(ngModel)]="registerDetails.username" placeholder="Username"/>
     <input [(ngModel)]="registerDetails.password" placeholder="Password"/>
     <input [(ngModel)]="registerDetails.location" placeholder="Location (e.g. Chicago, IL)"/>
-    <button (click)="register()">Sign up</button>
+    <button (click)="loginOrRegister('register')">Sign up</button>
   </div>
 </div>

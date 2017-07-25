@@ -9,13 +9,17 @@ import { ListComponent } from './list/list.component';
 import { DetailComponent } from './detail/detail.component';
 import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [{
   path: 'swaps',
   component: ListComponent
 }, {
-	path: '',
-	component: HomeComponent
+  path: '',
+  component: HomeComponent
+}, {
+  path: 'account',
+  component: AccountComponent
 }, {
 	path: 'swaps/:id',
 	component: DetailComponent
@@ -26,7 +30,8 @@ const routes: Routes = [{
     AppComponent,
     ListComponent,
     DetailComponent,
-    HomeComponent
+    HomeComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

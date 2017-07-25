@@ -25,6 +25,7 @@ class Comment {
 	swap_id: number;
 	message: string;
 	user_id: number;
+	private: boolean;
 }
 
 @Component({

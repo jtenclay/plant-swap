@@ -25,7 +25,7 @@ class UserController < ApplicationController
     if user && user.authenticate(request_body["password"])
       user.to_json
     else
-      {error: "Failed!!"}.to_json
+      401
     end
   end
 end

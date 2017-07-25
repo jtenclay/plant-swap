@@ -10,10 +10,11 @@
 		by {{comment.user.username}}</div>
 </div>
 <div *ngIf="dataService.loggedIn">
-	<button *ngIf="!addCommentToggle" (click)="showAddComment()">Add Comment</button>
+	<button *ngIf="!addCommentToggle" (click)="showAddComment()">Comment or Respond</button>
 	<div *ngIf="addCommentToggle">
 		add comment form
 		<textarea [(ngModel)]="newComment.message" placeholder="Write your comment..."></textarea>
+		Private (use this if you're sending info to meet up!): <input type="checkbox" [(ngModel)]="newComment.private">
 	  <button (click)="postComment()">Submit</button>
 	</div>
 </div>
