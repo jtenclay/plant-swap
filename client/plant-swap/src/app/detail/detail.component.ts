@@ -37,11 +37,13 @@ export class DetailComponent {
 
 	loggedIn: boolean;
 	swap: Swap = new Swap();
+	editSwap: Swap = new Swap();
 	thisUser: User = new User();
 	tags = [];
 	comments: Comment[] = [];
 	addCommentToggle: boolean = false;
 	newComment: Comment = new Comment();
+	showEditModal: boolean = false;
 	id: number;
 
   constructor(private route: ActivatedRoute, private http: Http, private dataService: DataService) {
@@ -75,6 +77,20 @@ export class DetailComponent {
     }, err => {
     	alert("error");
     })
+  }
+
+  toggleEditModal() {
+  	this.editSwap = Object.assign({}, this.swap);
+  	this.showEditModal = !this.showEditModal;
+  }
+
+  patchSwap() {
+    this.http.patch('http://localhost:9393/swaps/' + this.id + "?token=" + window.localStorage.token, this.editSwap).subscribe(response => {
+      this.swap = response.json();
+    }, err => {
+      alert("error");
+    })
+    this.showEditModal = false;
   }
 
 }

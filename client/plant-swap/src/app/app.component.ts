@@ -32,6 +32,10 @@ export class AppComponent {
 		this.loginModalToggle = true;
 	}
 
+	hideLoginModal() {
+		this.loginModalToggle = false;
+	}
+
 	loginOrRegister(loginOrRegister) {
 		this.http.post('http://localhost:9393/users/' + loginOrRegister, this.userDetails).subscribe(response => {
       window.localStorage.setItem("loggedIn", "true");
@@ -40,6 +44,7 @@ export class AppComponent {
       window.localStorage.setItem("id", response.json().id);
       this.dataService.loggedIn = true;
       this.dataService.loggedInUser = response.json().username;
+      this.dataService.loggedInId = response.json().id;
     }, err => {
       alert("error");
     })

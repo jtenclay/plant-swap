@@ -9,20 +9,23 @@
 <div id="body-wrapper">
   <router-outlet></router-outlet>
 </div>
-<div *ngIf="loginModalToggle" id="login-register-wrapper">
-  <div id="login-register-toggle-wrapper">
-    <p (click)="toggleLoginRegister($event)" [ngClass]="loginClass">Log in</p>
-    <p (click)="toggleLoginRegister($event)" [ngClass]="registerClass">Sign up</p>
-  </div>
-  <div [ngClass]="loginClass">
-    <input [(ngModel)]="userDetails.username" placeholder="Username"/>
-    <input [(ngModel)]="userDetails.password" placeholder="Password"/>
-    <button (click)="loginOrRegister('login')">Log in</button>
-  </div>
-  <div [ngClass]="registerClass">
-    <input [(ngModel)]="registerDetails.username" placeholder="Username"/>
-    <input [(ngModel)]="registerDetails.password" placeholder="Password"/>
-    <input [(ngModel)]="registerDetails.location" placeholder="Location (e.g. Chicago, IL)"/>
-    <button (click)="loginOrRegister('register')">Sign up</button>
+<div id="login-register-background" *ngIf="loginModalToggle">
+  <div id="login-register-wrapper">
+    <span (click)="hideLoginModal()">X</span>
+    <div id="login-register-toggle-wrapper">
+      <p (click)="toggleLoginRegister($event)" [ngClass]="loginClass">Log in</p>
+      <p (click)="toggleLoginRegister($event)" [ngClass]="registerClass">Sign up</p>
+    </div>
+    <div [ngClass]="loginClass">
+      <input [(ngModel)]="userDetails.username" placeholder="Username"/>
+      <input [(ngModel)]="userDetails.password" placeholder="Password"/>
+      <button (click)="loginOrRegister('login')">Log in</button>
+    </div>
+    <div [ngClass]="registerClass">
+      <input [(ngModel)]="registerDetails.username" placeholder="Username"/>
+      <input [(ngModel)]="registerDetails.password" placeholder="Password"/>
+      <input [(ngModel)]="registerDetails.location" placeholder="Location (e.g. Chicago, IL)"/>
+      <button (click)="loginOrRegister('register')">Sign up</button>
+    </div>
   </div>
 </div>

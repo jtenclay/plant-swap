@@ -52,7 +52,7 @@ class SwapController < ApplicationController
     request_body = JSON.parse(request.body.read)
     swap.update_attributes(request_body)
     swap.save
-    Swap.all.to_json
+    swap.to_json
   end
 
   delete '/:id' do
