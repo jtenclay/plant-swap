@@ -1,4 +1,17 @@
 body {
-  background-color: red;
-  font-size: 40rem;
+  background-color: beige;
+}
+#login-register-wrapper p {
+  color: black;
+}
+#login-register-wrapper p.active {
+  color: red;
+}
+#login-register-wrapper div input,
+#login-register-wrapper div button {
+  display: none;
+}
+#login-register-wrapper div.active input,
+#login-register-wrapper div.active button {
+  display: block;
 }

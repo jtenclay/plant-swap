@@ -16,6 +16,7 @@ class Swap {
 class User {
 	id: number;
 	username: string;
+	location: string;
 }
 
 class Comment {
@@ -33,8 +34,8 @@ class Comment {
 export class DetailComponent {
 
 	loggedIn: boolean;
-	swap: Swap = new Swap;
-	thisUser: User = new User;
+	swap: Swap = new Swap();
+	thisUser: User = new User();
 	tags = [];
 	comments: Comment[] = [];
 	addCommentToggle: boolean = false;

@@ -7,9 +7,20 @@
 
 <router-outlet></router-outlet>
 
-<div *ngIf="loginModalToggle">
-  <p>login modal</p>
-  <input [(ngModel)]="userDetails.username" placeholder="Username"/>
-  <input [(ngModel)]="userDetails.password" placeholder="Password"/>
-  <button (click)="login()">Submit</button>
+<div *ngIf="loginModalToggle" id="login-register-wrapper">
+  <div id="login-register-toggle-wrapper">
+    <p (click)="toggleLoginRegister($event)" [ngClass]="loginClass">Log in</p>
+    <p (click)="toggleLoginRegister($event)" [ngClass]="registerClass">Register</p>
+  </div>
+  <div [ngClass]="loginClass">
+    <input [(ngModel)]="userDetails.username" placeholder="Username"/>
+    <input [(ngModel)]="userDetails.password" placeholder="Password"/>
+    <button (click)="login()">Log in</button>
+  </div>
+  <div [ngClass]="registerClass">
+    <input [(ngModel)]="registerDetails.username" placeholder="Username"/>
+    <input [(ngModel)]="registerDetails.password" placeholder="Password"/>
+    <input [(ngModel)]="registerDetails.location" placeholder="Location (e.g. Chicago, IL)"/>
+    <button (click)="register()">Sign up</button>
+  </div>
 </div>
