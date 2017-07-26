@@ -5,6 +5,18 @@
 </p>
 <p><a href="#" (click)="logout($event)">Log out</a></p>
 
+<div id="swaps-list">
+	<div *ngFor="let swap of swaps" (click)="goToDetail(swap)">
+		<img src="{{swap.swap.image_url}}">
+		<p>{{swap.swap.title}} by {{swap.user.username}}</p>
+		<p>{{swap.swap.description}}</p>
+		<p>open? {{swap.swap.is_open}}</p>
+		<ul>
+			<li *ngFor="let tag of swap.tags">{{tag.name}}</li>
+		</ul>
+	</div>
+</div>
+
 <div id="new-swap-modal-bg" *ngIf="showNewModal">
 	<div id="new-swap-modal">
 		<span (click)="toggleNewModal()">X</span>
