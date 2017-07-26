@@ -14,6 +14,12 @@ class Swap {
 	image_url: string;
 }
 
+class Tag {
+	id: number;
+	swap_id: number;
+	name: string;
+}
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -22,9 +28,12 @@ class Swap {
 export class AccountComponent {
 
 	showNewModal: boolean = false;
+	showDeleteModal: boolean = false;
 	newSwap: Swap = new Swap();
 	baseUrl = 'http://localhost:9393/';
 	swaps: Swap[] = [];
+	newTags: Tag[] = [];
+	newTagString: string = '';
 
   constructor(private router: Router, private dataService: DataService, private http: Http) {
   	this.newSwap.user_id = window.localStorage.id;
@@ -60,9 +69,24 @@ export class AccountComponent {
   	this.showNewModal = !this.showNewModal;
   }
 
+  toggleDeleteModal() {
+  	this.showDeleteModal = !this.showDeleteModal;
+  }
+
   postSwap() {
-  	// add in posting tags!!!
-    this.http.post(this.baseUrl + 'swaps/?token=' + window.localStorage.token, this.newSwap).subscribe(response => {
+  	this.newTags = [];
+  	let newTagsArray = this.newTagString.split(',');
+  	for (let tag of newTagsArray) {
+  		let newTag = new Tag();
+  		newTag.name = tag.trim()
+  		this.newTags.push(newTag);
+  	}
+  	let postObject = {swap: this.newSwap, tags: this.newTags};
+    this.http.post(this.baseUrl + 'swaps/?token=' + window.localStorage.token, postObject).subscribe(response => {
+    	this.swaps = [];
+			this.newTags = [];
+			this.newTagString = '';
+			this.newSwap = new Swap();
       for (let swap of response.json().swaps) {
 				if (swap.user.id == window.localStorage.id) {
 					this.swaps.push(swap)

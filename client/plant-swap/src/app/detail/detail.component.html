@@ -23,12 +23,13 @@
 	<p>You must log in to post comments.</p>
 </div>
 
-<div id="edit-swap-modal-bg" *ngIf="showEditModal">
-	<div id="edit-swap-modal">
+<div class="modal-background" *ngIf="showEditModal">
+	<div class="modal">
 		<span (click)="toggleEditModal()">X</span>
 		<input [(ngModel)]="editSwap.title" placeholder="Title"/>
     <textarea [(ngModel)]="editSwap.description" placeholder="Description"></textarea>
     <input [(ngModel)]="editSwap.image_url" placeholder="Image URL"/>
+    <input [(ngModel)]="editTagString" placeholder="Tags (separated by commas)"/>
     <button (click)="patchSwap()">Update</button>
 	</div>
 </div>

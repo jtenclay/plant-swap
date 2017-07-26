@@ -28,6 +28,12 @@ class Comment {
 	private: boolean;
 }
 
+class Tag {
+	id: number;
+	swap_id: number;
+	name: string;
+}
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
@@ -38,8 +44,10 @@ export class DetailComponent {
 	loggedIn: boolean;
 	swap: Swap = new Swap();
 	editSwap: Swap = new Swap();
+	editTagString: string = "";
+	editTags: Tag[] = [];
 	thisUser: User = new User();
-	tags = [];
+	tags: Tag[] = [];
 	comments: Comment[] = [];
 	addCommentToggle: boolean = false;
 	newComment: Comment = new Comment();
@@ -81,12 +89,30 @@ export class DetailComponent {
 
   toggleEditModal() {
   	this.editSwap = Object.assign({}, this.swap);
+  	let editTagsArray = []
+  	for (let tag of this.tags) {
+  		editTagsArray.push(tag.name)
+  	};
+  	this.editTagString = editTagsArray.join(', ');
   	this.showEditModal = !this.showEditModal;
   }
 
   patchSwap() {
-    this.http.patch('http://localhost:9393/swaps/' + this.id + "?token=" + window.localStorage.token, this.editSwap).subscribe(response => {
-      this.swap = response.json();
+  	this.editTags = [];
+  	let editTagsArray = this.editTagString.split(',');
+  	for (let tag of editTagsArray) {
+  		let editTag = new Tag();
+  		editTag.name = tag.trim()
+  		this.editTags.push(editTag);
+  	}
+  	let patchObject = {swap: this.editSwap, tags: this.editTags};
+    this.http.patch('http://localhost:9393/swaps/' + this.id + "?token=" + window.localStorage.token, patchObject).subscribe(response => {
+      this.swap = response.json().swap;
+      this.tags = [];
+      for (let tag of response.json().tags) {
+      	this.tags.push(tag);
+      }
+      this.editTags = [];
     }, err => {
       alert("error");
     })

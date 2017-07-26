@@ -40,9 +40,17 @@ class SwapController < ApplicationController
   end
 
   post '/' do
+    # save swap
     request_body = JSON.parse(request.body.read)
-    swap = Swap.new(request_body)
+    swap = Swap.new(request_body['swap'])
     swap.save
+    # save tags
+    tags = request_body['tags']
+    tags.each do |tag|
+      new_tag = Tag.new(tag)
+      new_tag.swap_id = swap.id
+      new_tag.save
+    end
     swaps = Swap.all
     modifiedSwaps = []
     swaps.each do |swap|
@@ -60,9 +68,19 @@ class SwapController < ApplicationController
     id = params[:id]
     swap = Swap.find(id)
     request_body = JSON.parse(request.body.read)
-    swap.update_attributes(request_body)
+    swap.update_attributes(request_body['swap'])
     swap.save
-    swap.to_json
+    # update tags
+    swap.tags.each do |tag|
+      tag.destroy
+    end
+    tags = request_body['tags']
+    tags.each do |tag|
+      new_tag = Tag.new(tag)
+      new_tag.swap_id = swap.id
+      new_tag.save
+    end
+    {swap: swap, tags: swap.tags}.to_json
   end
 
   delete '/:id' do
