@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { DataService } from './data.service';
+import { Router } from '@angular/router'
 
 class User {
 	id: number;
@@ -23,7 +24,7 @@ export class AppComponent {
 	loginClass: string = 'active';
 	registerClass: string = '';
 
-	constructor(private http: Http, private dataService: DataService) {
+	constructor(private http: Http, private dataService: DataService, private router: Router) {
 		
 	}
 
@@ -45,6 +46,7 @@ export class AppComponent {
       this.dataService.loggedIn = true;
       this.dataService.loggedInUser = response.json().username;
       this.dataService.loggedInId = response.json().id;
+      this.router.navigate(['/swaps'])
     }, err => {
       alert("error");
     })

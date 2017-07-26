@@ -30,7 +30,11 @@ export class ListComponent {
 
 	getSwaps() {
 		this.http.get(this.baseUrl + 'swaps?token=' + window.localStorage.token).subscribe(response => {
-      this.swaps = response.json().swaps
+			for (let swap of response.json().swaps) {
+				if (swap.swap.is_open) {
+					this.swaps.push(swap);
+				}
+			}
     }, err => {
       alert("error");
     })
