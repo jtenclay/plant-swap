@@ -16,7 +16,7 @@ class User {
 export class AppComponent {
 
 	loggedInState: any = true
-	loginRegisterToggle: boolean = false;
+	loginRegisterToggle: boolean = true;
 	loginModalToggle: boolean = false;
 	userDetails: User = new User();
 	registerDetails: User = new User();
