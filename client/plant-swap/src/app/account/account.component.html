@@ -6,9 +6,10 @@
 <p><a href="#" (click)="logout($event)">Log out</a></p>
 
 <div id="swaps-list">
-	<div *ngFor="let swap of swaps" (click)="goToDetail(swap)">
+	<div *ngFor="let swap of swaps">
 		<img src="{{swap.swap.image_url}}">
 		<p>{{swap.swap.title}} by {{swap.user.username}}</p>
+		<button (click)="goToDetail(swap)">View</button>
 		<p>{{swap.swap.description}}</p>
 		<p>open? {{swap.swap.is_open}}</p>
 		<ul>

@@ -44,6 +44,10 @@ export class AccountComponent {
     })
   }
 
+  goToDetail(swap) {
+		this.router.navigate(['/swaps', swap.swap.id])
+  }
+
   logout($event) {
   	$event.preventDefault();
   	this.dataService.loggedIn = false;
@@ -59,7 +63,11 @@ export class AccountComponent {
   postSwap() {
   	// add in posting tags!!!
     this.http.post(this.baseUrl + 'swaps/?token=' + window.localStorage.token, this.newSwap).subscribe(response => {
-      // update page with all swaps
+      for (let swap of response.json().swaps) {
+				if (swap.user.id == window.localStorage.id) {
+					this.swaps.push(swap)
+				}
+			}
     }, err => {
       alert("error");
     })
