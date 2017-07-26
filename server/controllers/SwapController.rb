@@ -83,10 +83,29 @@ class SwapController < ApplicationController
     {swap: swap, tags: swap.tags}.to_json
   end
 
+  patch '/:id/open_or_close' do
+    id = params[:id]
+    swap = Swap.find(id)
+    request_body = JSON.parse(request.body.read)
+    swap.update_attributes(request_body)
+    swap.save
+    swap.to_json
+  end
+
   delete '/:id' do
     id = params[:id]
     swap = Swap.find(id)
     swap.destroy
-    Swap.all.to_json
+    swaps = Swap.all
+    modifiedSwaps = []
+    swaps.each do |swap|
+      modifiedSwaps << {swap: swap, user: swap.user, tags: swap.tags}
+    end
+    token = params[:token]
+    user = User.find_by(token: token)
+    if user
+      loggedInUser = user
+    end
+    {swaps: modifiedSwaps, loggedInUser: loggedInUser}.to_json
   end
 end

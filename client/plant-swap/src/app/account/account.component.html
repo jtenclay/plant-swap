@@ -10,9 +10,9 @@
 		<img src="{{swap.swap.image_url}}">
 		<p>{{swap.swap.title}} by {{swap.user.username}}</p>
 		<button (click)="goToDetail(swap)">View</button>
-		<button (click)="toggleDeleteModal()">Delete</button>
+		<button (click)="revealDeleteModal(swap)">Delete</button>
 		<p>{{swap.swap.description}}</p>
-		<p>open? {{swap.swap.is_open}}</p>
+		<p>open? <input type="checkbox" (change)="openCloseSwap(swap)" [(ngModel)]="swap.swap.is_open"></p>
 		<ul>
 			<li *ngFor="let tag of swap.tags">{{tag.name}}</li>
 		</ul>
@@ -32,9 +32,9 @@
 
 <div class="modal-background" *ngIf="showDeleteModal">
 	<div class="modal">
-		<span (click)="toggleDeleteModal()">X</span>
+		<span (click)="showDeleteModal = !showDeleteModal;">X</span>
 		<p>Are you sure you want to delete this swap? This action is irreversible and you'll no longer be able to access its comments and information. If a swap has been fulfilled, consider closing it instead.</p>
-		<button (click)="deleteSwap()">Delete this swap</button>
-		<button (click)="toggleDeleteModal()">Never mind!</button>
+		<button (click)="showDeleteModal = !showDeleteModal;">Never mind!</button>
+		<button (click)="deleteSwap(swap)">Delete this swap</button>
 	</div>
 </div>

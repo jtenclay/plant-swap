@@ -34,6 +34,7 @@ export class AccountComponent {
 	swaps: Swap[] = [];
 	newTags: Tag[] = [];
 	newTagString: string = '';
+	swapIdToDelete: number;
 
   constructor(private router: Router, private dataService: DataService, private http: Http) {
   	this.newSwap.user_id = window.localStorage.id;
@@ -69,8 +70,9 @@ export class AccountComponent {
   	this.showNewModal = !this.showNewModal;
   }
 
-  toggleDeleteModal() {
+  revealDeleteModal(swap) {
   	this.showDeleteModal = !this.showDeleteModal;
+  	this.swapIdToDelete = swap.swap.id;
   }
 
   postSwap() {
@@ -97,4 +99,28 @@ export class AccountComponent {
     })
     this.toggleNewModal()
   }
+
+  openCloseSwap(swap) {
+  	let patchObject = {is_open: swap.swap.is_open}
+  	this.http.patch('http://localhost:9393/swaps/' + swap.swap.id + '/open_or_close' + "?token=" + window.localStorage.token, patchObject).subscribe(response => {
+      console.log(response);
+    }, err => {
+      alert("error");
+    })
+  }
+
+  deleteSwap() {
+  	this.http.delete(this.baseUrl + 'swaps/' + this.swapIdToDelete + '?token=' + window.localStorage.token).subscribe(response => {
+    	this.swaps = [];
+      for (let swap of response.json().swaps) {
+				if (swap.user.id == window.localStorage.id) {
+					this.swaps.push(swap)
+				}
+			}
+			this.showDeleteModal = !this.showDeleteModal;
+    }, err => {
+      alert("error");
+    })
+  }
+
 }
