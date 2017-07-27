@@ -493,6 +493,13 @@ nav:after {
   display: table;
   clear: both;
 }
+#home-wrapper {
+  padding: 0 .5rem;
+}
+#home-wrapper h3 {
+  text-align: center;
+  margin: 2rem 0;
+}
 #sidebar {
   float: left;
   width: 25%;
@@ -595,12 +602,18 @@ footer p {
   width: 20rem;
   max-width: 100%;
 }
-.modal-background .modal label {
+.modal-background .modal .close-modal {
+  float: right;
+}
+.modal-background .modal h4 {
+  margin: 0 0 1rem;
+}
+label {
   margin: 0 0 .5rem 0;
   display: block;
 }
-.modal-background .modal input,
-.modal-background .modal textarea {
+input:not([type="checkbox"]),
+textarea {
   margin: 0 0 1rem 0;
   display: block;
   width: 100%;

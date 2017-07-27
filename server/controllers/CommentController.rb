@@ -8,7 +8,7 @@ class CommentController < ApplicationController
     user = User.find_by(token: token)
     swap_id = comment.swap_id
     swap = Swap.find(swap_id)
-    comments = swap.comments
+    comments = swap.comments.order('created_at ASC')
     modifiedComments = []
     comments.each do |comment|
       # weed out private responses unless it belongs to the accessing user

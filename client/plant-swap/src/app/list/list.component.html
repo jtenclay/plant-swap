@@ -5,7 +5,7 @@
 	<div *ngFor="let swap of swaps" class="each-swap">
 		<img src="{{swap.swap.image_url}}" (click)="goToDetail(swap)" (error)="swapOutImage($event)">
 		<div class="each-swap-info">
-			<h3>{{swap.swap.title}}<span class="swap-owner"> by {{swap.user.username}}</span></h3>
+			<h3>{{swap.swap.title}}<span class="swap-owner"> – {{swap.user.username}}</span></h3>
 			<p>{{swap.swap.description}}</p>
 			<ul class="tags-list" *ngIf="swap.tags.length > 0">
 				<li>Tags: </li>

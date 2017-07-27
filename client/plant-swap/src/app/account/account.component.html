@@ -23,7 +23,8 @@
 
 <div class="modal-background" *ngIf="showNewModal">
 	<div class="modal">
-		<span (click)="toggleNewModal()">X</span>
+		<span (click)="toggleNewModal()" class="close-modal">X</span>
+		<h4>Create New Swap</h4>
 		<label for="title">Title</label>
 		<input [(ngModel)]="newSwap.title" placeholder="Title" id="title" />
 		<label for="description">Description</label>
@@ -38,7 +39,8 @@
 
 <div class="modal-background" *ngIf="showDeleteModal">
 	<div class="modal">
-		<span (click)="showDeleteModal = !showDeleteModal;">X</span>
+		<span (click)="showDeleteModal = !showDeleteModal;" class="close-modal">X</span>
+		<h4>Delete Swap</h4>
 		<p>Are you sure you want to delete this swap? This action is irreversible and you'll no longer be able to access its comments and information. If a swap has been fulfilled, consider closing it instead.</p>
 		<button (click)="showDeleteModal = !showDeleteModal;">Never mind!</button>
 		<button (click)="deleteSwap(swap)">Delete this swap</button>

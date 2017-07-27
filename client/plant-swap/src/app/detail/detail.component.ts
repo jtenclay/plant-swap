@@ -65,7 +65,10 @@ export class DetailComponent {
 			this.swap = response.json().swap;
 			this.thisUser = response.json().user;
 			this.tags = response.json().tags;
-			this.comments = response.json().comments;
+			for (let comment of response.json().comments) {
+  			comment.comment.created_at = this.formatDate(comment.comment.created_at)
+  			this.comments.push(comment);
+  		}
 	  }, err => {
 			alert("error");
     })
@@ -79,7 +82,11 @@ export class DetailComponent {
   	this.newComment.user_id = parseInt(window.localStorage.id);
   	this.newComment.swap_id = this.id;
   	this.http.post('http://localhost:9393/comments?token=' + window.localStorage.token, this.newComment).subscribe(response => {
-      this.comments = response.json();
+  		this.comments = [];
+  		for (let comment of response.json()) {
+  			comment.comment.created_at = this.formatDate(comment.comment.created_at)
+  			this.comments.push(comment);
+  		}
       this.newComment.message = "";
       this.addCommentToggle = false;
     }, err => {
@@ -117,6 +124,17 @@ export class DetailComponent {
       alert("error");
     })
     this.showEditModal = false;
+  }
+
+  formatDate(dbDate) {
+  	let t = dbDate.split(/[-TZ:]/);
+		let d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+		return(d.toLocaleString());
+  }
+
+  swapOutImage($event) {
+  	// change out broken images with a placeholder
+  	$event.target.src = "http://eduevents.in/images/image_not_available.jpg"
   }
 
 }

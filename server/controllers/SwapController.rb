@@ -21,7 +21,7 @@ class SwapController < ApplicationController
     tags = swap.tags
     token = params[:token]
     user = User.find_by(token: token)
-    comments = swap.comments
+    comments = swap.comments.order('created_at ASC')
     modifiedComments = []
     comments.each do |comment|
       # weed out private responses unless it belongs to the accessing user

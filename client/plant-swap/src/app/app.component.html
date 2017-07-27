@@ -14,7 +14,7 @@
 </footer>
 <div class="modal-background" id="login-register-background" *ngIf="loginModalToggle">
   <div class="modal" id="login-register-wrapper">
-    <span (click)="hideLoginModal()">X</span>
+    <span (click)="hideLoginModal()" class="close-modal">X</span>
     <div id="login-register-toggle-wrapper">
       <p (click)="toggleLoginRegister($event)" [ngClass]="loginClass">Log in</p>
       <p (click)="toggleLoginRegister($event)" [ngClass]="registerClass">Sign up</p>

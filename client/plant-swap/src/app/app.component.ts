@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { DataService } from './data.service';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 class User {
 	id: number;
@@ -46,7 +46,10 @@ export class AppComponent {
       this.dataService.loggedIn = true;
       this.dataService.loggedInUser = response.json().username;
       this.dataService.loggedInId = response.json().id;
-      this.router.navigate(['/swaps'])
+      // redirect user away from homepage, but if they're already on a list or detail page let them stay there
+      if (!window.location.href.match(/swaps/)) {
+      	this.router.navigate(['/swaps'])
+      }
     }, err => {
       alert("error");
     })

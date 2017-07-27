@@ -54,6 +54,14 @@ nav {
 	}
 }
 
+#home-wrapper {
+	padding: 0 .5rem;
+	h3 {
+		text-align: center;
+		margin: 2rem 0;
+	}
+}
+
 #sidebar {
 	float: left;
 	width: 25%;
@@ -174,14 +182,21 @@ footer p {
     padding: 1rem;
     width: 20rem;
     max-width: 100%;
-    label {
-    	margin: 0 0 .5rem 0;
-    	display: block;
+    .close-modal {
+    	float: right;
     }
-		input, textarea {
-			margin: 0 0 1rem 0;
-			display: block;
-			width: 100%;
-		}
+    h4 {
+    	margin: 0 0 1rem;
+    }
 	}
+}
+
+label {
+	margin: 0 0 .5rem 0;
+	display: block;
+}
+input:not([type="checkbox"]), textarea {
+	margin: 0 0 1rem 0;
+	display: block;
+	width: 100%;
 }
