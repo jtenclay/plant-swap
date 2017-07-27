@@ -6,36 +6,43 @@
 		<p>{{swap.title}} by {{thisUser.username}}</p>
 		<p>{{swap.description}}</p>
 		<p>open? {{swap.is_open}}</p>
-		<ul>
-			<li *ngFor="let tag of tags">{{tag.name}}</li>
+		<ul class="tags-list" *ngIf="tags.length > 0">
+			<li>Tags: </li>
+			<li *ngFor="let tag of tags">{{tag.name}}<span class="tag-comma"></span></li>
 		</ul>
 		<button *ngIf="thisUser.id == dataService.loggedInId" (click)="toggleEditModal()">Edit</button>
 	</div>
 </div>
+
 <div id="comments-wrapper">
+	<div *ngIf="comments.length == 0">No replies yet!</div>
 	<div *ngFor="let comment of comments">{{comment.comment.message}}<br>
 		by {{comment.user.username}}</div>
-</div>
-<div *ngIf="dataService.loggedIn">
-	<button *ngIf="!addCommentToggle" (click)="showAddComment()">Comment or Respond</button>
-	<div *ngIf="addCommentToggle">
-		add comment form
-		<textarea [(ngModel)]="newComment.message" placeholder="Write your comment..."></textarea>
-		Private (use this if you're sending info to meet up!): <input type="checkbox" [(ngModel)]="newComment.private">
-	  <button (click)="postComment()">Submit</button>
+	<div *ngIf="dataService.loggedIn">
+		<button *ngIf="!addCommentToggle" (click)="showAddComment()">Reply</button>
+		<div *ngIf="addCommentToggle">
+			add comment form
+			<textarea [(ngModel)]="newComment.message" placeholder="Write your comment..."></textarea>
+			Private (use this if you're sending info to meet up!): <input type="checkbox" [(ngModel)]="newComment.private">
+		  <button (click)="postComment()">Submit</button>
+		</div>
 	</div>
-</div>
-<div *ngIf="!dataService.loggedIn">
-	<p>You must log in to post comments.</p>
+	<div *ngIf="!dataService.loggedIn">
+		<p>You must log in to post comments.</p>
+	</div>
 </div>
 
 <div class="modal-background" *ngIf="showEditModal">
 	<div class="modal">
 		<span (click)="toggleEditModal()">X</span>
-		<input [(ngModel)]="editSwap.title" placeholder="Title"/>
-    <textarea [(ngModel)]="editSwap.description" placeholder="Description"></textarea>
-    <input [(ngModel)]="editSwap.image_url" placeholder="Image URL"/>
-    <input [(ngModel)]="editTagString" placeholder="Tags (separated by commas)"/>
+		<label for="title">Title</label>
+		<input [(ngModel)]="editSwap.title" placeholder="Title" id="title" />
+		<label for="description">Description</label>
+    <textarea rows="4" [(ngModel)]="editSwap.description" placeholder="Description" id="description"></textarea>
+    <label for="image-url">Image URL</label>
+    <input [(ngModel)]="editSwap.image_url" placeholder="Image URL" id="image-url" />
+    <label for="tags">Tags (separated by commas)</label>
+    <input [(ngModel)]="editTagString" placeholder="e.g. succulent, aeonium" id="tags" />
     <button (click)="patchSwap()">Update</button>
 	</div>
 </div>

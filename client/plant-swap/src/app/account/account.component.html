@@ -7,25 +7,31 @@
 	<button (click)="toggleNewModal()">New swap</button>
 	<div *ngFor="let swap of swaps" class="each-swap">
 		<img src="{{swap.swap.image_url}}">
-		<h3>{{swap.swap.title}}</h3>
-		<p>{{swap.swap.description}}</p>
-		<p>open? <input type="checkbox" (change)="openCloseSwap(swap)" [(ngModel)]="swap.swap.is_open"></p>
-		<ul class="tags-list" *ngIf="swap.tags.length > 0">
-			<li>Tags: </li>
-			<li *ngFor="let tag of swap.tags">{{tag.name}}<span class="tag-comma"></span></li>
-		</ul>
-		<button (click)="goToDetail(swap)">View</button>
-		<button (click)="revealDeleteModal(swap)">Delete</button>
+		<div class="each-swap-info">
+			<h3>{{swap.swap.title}}</h3>
+			<p>{{swap.swap.description}}</p>
+			<p>open? <input type="checkbox" (change)="openCloseSwap(swap)" [(ngModel)]="swap.swap.is_open"></p>
+			<ul class="tags-list" *ngIf="swap.tags.length > 0">
+				<li>Tags: </li>
+				<li *ngFor="let tag of swap.tags">{{tag.name}}<span class="tag-comma"></span></li>
+			</ul>
+			<button (click)="goToDetail(swap)">View</button>
+			<button (click)="revealDeleteModal(swap)">Delete</button>
+		</div>
 	</div>
 </div>
 
 <div class="modal-background" *ngIf="showNewModal">
 	<div class="modal">
 		<span (click)="toggleNewModal()">X</span>
-		<input [(ngModel)]="newSwap.title" placeholder="Title"/>
-    <textarea [(ngModel)]="newSwap.description" placeholder="Description"></textarea>
-    <input [(ngModel)]="newSwap.image_url" placeholder="Image URL"/>
-    <input [(ngModel)]="newTagString" placeholder="Tags (separated by commas)"/>
+		<label for="title">Title</label>
+		<input [(ngModel)]="newSwap.title" placeholder="Title" id="title" />
+		<label for="description">Description</label>
+    <textarea rows="4" [(ngModel)]="newSwap.description" placeholder="Description" id="description"></textarea>
+		<label for="image-url">Image URL</label>
+    <input [(ngModel)]="newSwap.image_url" placeholder="Image URL" id="image-url" />
+    <label for="tags">Tags (separated by commas)</label>
+    <input [(ngModel)]="newTagString" placeholder="e.g. succulent, aeonium" id="tags" />
     <button (click)="postSwap()">Post</button>
 	</div>
 </div>

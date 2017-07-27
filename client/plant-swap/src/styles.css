@@ -468,6 +468,12 @@ body #body-wrapper img {
 body * {
   box-sizing: border-box;
 }
+input,
+button,
+textarea {
+  font-family: 'PT Serif', serif;
+  font-size: 1rem;
+}
 nav {
   max-width: 60rem;
   margin: 0 auto;
@@ -520,7 +526,7 @@ nav:after {
   clear: both;
 }
 .tags-list {
-  margin: 0;
+  margin: 1rem 0;
   padding: 0;
 }
 .tags-list li {
@@ -545,11 +551,24 @@ nav:after {
   display: table;
   clear: both;
 }
-#login-register-wrapper p {
-  color: black;
+#comments-wrapper {
+  padding: 0 .5rem;
 }
-#login-register-wrapper p.active {
-  color: red;
+footer p {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem 0 2rem;
+}
+#login-register-wrapper #login-register-toggle-wrapper {
+  display: flex;
+}
+#login-register-wrapper #login-register-toggle-wrapper p {
+  font-weight: normal;
+  flex-grow: 1;
+  text-align: center;
+}
+#login-register-wrapper #login-register-toggle-wrapper p.active {
+  font-weight: 700;
 }
 #login-register-wrapper div input,
 #login-register-wrapper div button {
@@ -572,4 +591,17 @@ nav:after {
 }
 .modal-background .modal {
   background-color: beige;
+  padding: 1rem;
+  width: 20rem;
+  max-width: 100%;
+}
+.modal-background .modal label {
+  margin: 0 0 .5rem 0;
+  display: block;
+}
+.modal-background .modal input,
+.modal-background .modal textarea {
+  margin: 0 0 1rem 0;
+  display: block;
+  width: 100%;
 }

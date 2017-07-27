@@ -37,8 +37,6 @@ export class AccountComponent {
 	swapIdToDelete: number;
 
   constructor(private router: Router, private dataService: DataService, private http: Http) {
-  	this.newSwap.user_id = window.localStorage.id;
-  	this.newSwap.is_open = true;
   	this.getSwaps();
   }
 
@@ -83,6 +81,8 @@ export class AccountComponent {
   		newTag.name = tag.trim()
   		this.newTags.push(newTag);
   	}
+  	this.newSwap.user_id = window.localStorage.id;
+  	this.newSwap.is_open = true;
   	let postObject = {swap: this.newSwap, tags: this.newTags};
     this.http.post(this.baseUrl + 'swaps/?token=' + window.localStorage.token, postObject).subscribe(response => {
     	this.swaps = [];

@@ -31,7 +31,7 @@ export class ListComponent {
 	getSwaps() {
 		this.http.get(this.baseUrl + 'swaps?token=' + window.localStorage.token).subscribe(response => {
 			for (let swap of response.json().swaps) {
-				if (swap.swap.is_open) {
+				if (swap.swap.is_open && swap.user.id != window.localStorage.id) {
 					this.swaps.push(swap);
 				}
 			}

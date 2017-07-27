@@ -29,6 +29,11 @@ body {
 	}
 }
 
+input, button, textarea {
+	font-family: @font-stack;
+	font-size: @body-font-size;
+}
+
 nav {
 	max-width: 60rem;
 	margin: 0 auto;
@@ -84,7 +89,7 @@ nav {
 }
 
 .tags-list {
-	margin: 0;
+	margin: 1rem 0;
 	padding: 0;
 	li {
 		list-style: none;
@@ -116,11 +121,30 @@ nav {
 	}
 }
 
+#comments-wrapper {
+	padding: 0 .5rem;
+}
+
+footer p {
+	text-align: center;
+	font-size: 1.5rem;
+	margin: 1rem 0 2rem;
+}
+
+
+
+// modal styles
+
 #login-register-wrapper {
-	p {
-		color: @text-color;
-		&.active {
-			color: red;
+	#login-register-toggle-wrapper {
+		display: flex;
+		p {
+			font-weight: normal;
+			flex-grow: 1;
+    	text-align: center;
+			&.active {
+				font-weight: 700;
+			}
 		}
 	}
 	div {
@@ -147,5 +171,17 @@ nav {
   justify-content: center;
 	.modal {
 		background-color: @background-color;
+    padding: 1rem;
+    width: 20rem;
+    max-width: 100%;
+    label {
+    	margin: 0 0 .5rem 0;
+    	display: block;
+    }
+		input, textarea {
+			margin: 0 0 1rem 0;
+			display: block;
+			width: 100%;
+		}
 	}
 }

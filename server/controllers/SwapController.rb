@@ -42,14 +42,18 @@ class SwapController < ApplicationController
   post '/' do
     # save swap
     request_body = JSON.parse(request.body.read)
+    p request_body['swap']
     swap = Swap.new(request_body['swap'])
     swap.save
     # save tags
     tags = request_body['tags']
     tags.each do |tag|
-      new_tag = Tag.new(tag)
-      new_tag.swap_id = swap.id
-      new_tag.save
+      # don't save empty tags
+      unless tag["name"] == ''
+        new_tag = Tag.new(tag)
+        new_tag.swap_id = swap.id
+        new_tag.save
+      end
     end
     swaps = Swap.all
     modifiedSwaps = []
