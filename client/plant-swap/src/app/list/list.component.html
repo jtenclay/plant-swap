@@ -2,12 +2,16 @@
 	<p>sidebar with filters</p>
 </div>
 <div id="swaps-list">
-	<div *ngFor="let swap of swaps" (click)="goToDetail(swap)">
-		<img src="{{swap.swap.image_url}}">
-		<p>{{swap.swap.title}} by {{swap.user.username}}</p>
-		<p>{{swap.swap.description}}</p>
-		<ul>
-			<li *ngFor="let tag of swap.tags">{{tag.name}}</li>
-		</ul>
+	<div *ngFor="let swap of swaps" class="each-swap">
+		<img src="{{swap.swap.image_url}}" (click)="goToDetail(swap)" (error)="swapOutImage($event)">
+		<div class="each-swap-info">
+			<h3>{{swap.swap.title}}<span class="swap-owner"> by {{swap.user.username}}</span></h3>
+			<p>{{swap.swap.description}}</p>
+			<ul class="tags-list" *ngIf="swap.tags.length > 0">
+				<li>Tags: </li>
+				<li *ngFor="let tag of swap.tags">{{tag.name}}<span class="tag-comma"></span></li>
+			</ul>
+			<button (click)="goToDetail(swap)">View</button>
+		</div>
 	</div>
 </div>

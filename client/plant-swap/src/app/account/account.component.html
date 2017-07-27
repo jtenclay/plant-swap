@@ -1,21 +1,21 @@
-<button (click)="toggleNewModal()">New swap</button>
-<p>
-  show all your swaps
-  toggle open/closed
-</p>
-<p><a href="#" (click)="logout($event)">Log out</a></p>
+<div id="sidebar">
+	<p>sidebar with filters</p>
+	<p><a href="#" (click)="logout($event)">Log out</a></p>
+</div>
 
 <div id="swaps-list">
-	<div *ngFor="let swap of swaps">
+	<button (click)="toggleNewModal()">New swap</button>
+	<div *ngFor="let swap of swaps" class="each-swap">
 		<img src="{{swap.swap.image_url}}">
-		<p>{{swap.swap.title}} by {{swap.user.username}}</p>
-		<button (click)="goToDetail(swap)">View</button>
-		<button (click)="revealDeleteModal(swap)">Delete</button>
+		<h3>{{swap.swap.title}}</h3>
 		<p>{{swap.swap.description}}</p>
 		<p>open? <input type="checkbox" (change)="openCloseSwap(swap)" [(ngModel)]="swap.swap.is_open"></p>
-		<ul>
-			<li *ngFor="let tag of swap.tags">{{tag.name}}</li>
+		<ul class="tags-list" *ngIf="swap.tags.length > 0">
+			<li>Tags: </li>
+			<li *ngFor="let tag of swap.tags">{{tag.name}}<span class="tag-comma"></span></li>
 		</ul>
+		<button (click)="goToDetail(swap)">View</button>
+		<button (click)="revealDeleteModal(swap)">Delete</button>
 	</div>
 </div>
 

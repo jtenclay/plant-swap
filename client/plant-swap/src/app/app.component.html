@@ -1,6 +1,6 @@
 <nav>
   <p><a routerLink="/">Plant Swap</a></p>
-  <div>
+  <div id="nav-right">
     <p><a routerLink="/swaps">Open Swaps</a></p>
     <p *ngIf="dataService.loggedIn"><a routerLink="/account">My Account</a></p>
     <p *ngIf="!dataService.loggedIn"><a href="#" (click)="showLoginModal($event)">Login</a></p>

@@ -1,34 +1,118 @@
 @import (inline) "normalize.css";
+@import (inline) "fonts.css";
 
 @background-color: beige;
 @text-color: black;
 @overlay-color: rgba(0,0,0,0.25);
+@font-stack: 'PT Serif', serif;
+@body-font-size: 1rem;
 
 body {
+	font-family: @font-stack;
+	font-size: @body-font-size;
 	margin: 1rem;
 	background-color: @background-color;
 	#body-wrapper {
 		max-width: 60rem;
 		margin: 0 auto;
+		&:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
 		img {
 			max-width: 100%;
 		}
+	}
+	* {
+		box-sizing: border-box;
 	}
 }
 
 nav {
 	max-width: 60rem;
 	margin: 0 auto;
+	padding: 0 .5rem;
 	div {
 		float: right;
 	}
 	p {
 		float: left;
 	}
+	#nav-right p {
+		margin-left: 1rem;
+	}
 	&:after {
 		content: "";
   	display: table;
   	clear: both;
+	}
+}
+
+#sidebar {
+	float: left;
+	width: 25%;
+	padding: 0 .5rem;
+}
+
+#swaps-list {
+	float: left;
+	width: 75%;
+	padding: 0 .5rem;
+	.each-swap {
+		margin-bottom: 1rem;
+		h3 .swap-owner {
+			font-weight: normal;
+			font-size: @body-font-size;
+		}
+		img {
+			padding-right: .5rem;
+			width: 33%;
+			float: left;
+		}
+		.each-swap-info {
+			float: left;
+	    width: 67%;
+	    padding: 0 .5rem;
+		}
+		&:after {
+			content: "";
+	  	display: table;
+	  	clear: both;
+		}
+	}
+}
+
+.tags-list {
+	margin: 0;
+	padding: 0;
+	li {
+		list-style: none;
+		display: inline-block;
+		// add commas before each tag except for the first two
+		&:nth-child(n+3) {
+			&:before {
+				content: ", "
+			}
+		}
+	}
+}
+
+#detail-main {
+	#detail-image {
+		width: 50%;
+		padding: 0 .5rem;
+		float: left;
+	}
+	#detail-info {
+		width: 50%;
+		padding: 0 .5rem;
+		float: left;
+	}
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
 	}
 }
 

@@ -1,11 +1,17 @@
-<p *ngIf="thisUser.id == dataService.loggedInId"><button (click)="toggleEditModal()">Edit this swap</button></p>
-<img src="{{swap.image_url}}">
-<p>{{swap.title}} by {{thisUser.username}}</p>
-<p>{{swap.description}}</p>
-<p>open? {{swap.is_open}}</p>
-<ul>
-	<li *ngFor="let tag of tags">{{tag.name}}</li>
-</ul>
+<div id="detail-main">
+	<div id="detail-image">
+		<img src="{{swap.image_url}}">
+	</div>
+	<div id="detail-info">
+		<p>{{swap.title}} by {{thisUser.username}}</p>
+		<p>{{swap.description}}</p>
+		<p>open? {{swap.is_open}}</p>
+		<ul>
+			<li *ngFor="let tag of tags">{{tag.name}}</li>
+		</ul>
+		<button *ngIf="thisUser.id == dataService.loggedInId" (click)="toggleEditModal()">Edit</button>
+	</div>
+</div>
 <div id="comments-wrapper">
 	<div *ngFor="let comment of comments">{{comment.comment.message}}<br>
 		by {{comment.user.username}}</div>

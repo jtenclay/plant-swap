@@ -446,7 +446,10 @@ template {
   display: none;
 }
 
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,700');
 body {
+  font-family: 'PT Serif', serif;
+  font-size: 1rem;
   margin: 1rem;
   background-color: beige;
 }
@@ -454,12 +457,21 @@ body #body-wrapper {
   max-width: 60rem;
   margin: 0 auto;
 }
+body #body-wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 body #body-wrapper img {
   max-width: 100%;
+}
+body * {
+  box-sizing: border-box;
 }
 nav {
   max-width: 60rem;
   margin: 0 auto;
+  padding: 0 .5rem;
 }
 nav div {
   float: right;
@@ -467,7 +479,68 @@ nav div {
 nav p {
   float: left;
 }
+nav #nav-right p {
+  margin-left: 1rem;
+}
 nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+#sidebar {
+  float: left;
+  width: 25%;
+  padding: 0 .5rem;
+}
+#swaps-list {
+  float: left;
+  width: 75%;
+  padding: 0 .5rem;
+}
+#swaps-list .each-swap {
+  margin-bottom: 1rem;
+}
+#swaps-list .each-swap h3 .swap-owner {
+  font-weight: normal;
+  font-size: 1rem;
+}
+#swaps-list .each-swap img {
+  padding-right: .5rem;
+  width: 33%;
+  float: left;
+}
+#swaps-list .each-swap .each-swap-info {
+  float: left;
+  width: 67%;
+  padding: 0 .5rem;
+}
+#swaps-list .each-swap:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tags-list {
+  margin: 0;
+  padding: 0;
+}
+.tags-list li {
+  list-style: none;
+  display: inline-block;
+}
+.tags-list li:nth-child(n+3):before {
+  content: ", ";
+}
+#detail-main #detail-image {
+  width: 50%;
+  padding: 0 .5rem;
+  float: left;
+}
+#detail-main #detail-info {
+  width: 50%;
+  padding: 0 .5rem;
+  float: left;
+}
+#detail-main:after {
   content: "";
   display: table;
   clear: both;
