@@ -37,7 +37,7 @@ input, button, textarea {
 nav {
 	max-width: 60rem;
 	margin: 0 auto;
-	padding: 0 .5rem;
+	padding: 0 .5rem 1rem;
 	div {
 		float: right;
 	}
@@ -45,7 +45,7 @@ nav {
 		float: left;
 	}
 	#nav-right p {
-		margin-left: 1rem;
+		margin-left: 2rem;
 	}
 	&:after {
 		content: "";
@@ -131,6 +131,18 @@ nav {
 
 #comments-wrapper {
 	padding: 0 .5rem;
+	max-width: 50%;
+	margin: 0 auto;
+	h3 {
+		padding: 0 .5rem;
+	}
+	div {
+		margin-bottom: 1rem;
+    padding: .5rem;
+	}
+	.private-comment {
+		background-color: @overlay-color;
+	}
 }
 
 footer p {

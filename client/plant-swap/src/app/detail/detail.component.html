@@ -6,7 +6,7 @@
 		<h2>{{swap.title}}</h2>
 		<p>– {{thisUser.username}}</p>
 		<p>{{swap.description}}</p>
-		<p>open? {{swap.is_open}}</p>
+		<p>This swap is <span *ngIf="swap.is_open; else closed">open</span><ng-template #closed>closed</ng-template>.</p>
 		<ul class="tags-list" *ngIf="tags.length > 0">
 			<li>Tags: </li>
 			<li *ngFor="let tag of tags">{{tag.name}}<span class="tag-comma"></span></li>
@@ -16,9 +16,10 @@
 </div>
 
 <div id="comments-wrapper">
+	<h3>Comments</h3>
 	<div *ngIf="comments.length == 0">No replies yet!</div>
-	<div *ngFor="let comment of comments">{{comment.comment.message}}<br>
-		by {{comment.user.username}} on {{comment.comment.created_at}}</div>
+	<div *ngFor="let comment of comments" [ngClass]="{'private-comment': comment.comment.private}">{{comment.user.username}} on {{comment.comment.created_at}} said:<br>
+		{{comment.comment.message}}</div>
 	<div *ngIf="dataService.loggedIn">
 		<button *ngIf="!addCommentToggle" (click)="showAddComment()">Reply</button>
 		<div *ngIf="addCommentToggle">
