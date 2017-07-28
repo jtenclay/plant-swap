@@ -21,12 +21,12 @@
     </div>
     <div [ngClass]="loginClass">
       <input [(ngModel)]="userDetails.username" placeholder="Username"/>
-      <input [(ngModel)]="userDetails.password" placeholder="Password"/>
+      <input [(ngModel)]="userDetails.password" placeholder="Password" type="password"/>
       <button (click)="loginOrRegister('login')">Log in</button>
     </div>
     <div [ngClass]="registerClass">
       <input [(ngModel)]="registerDetails.username" placeholder="Username"/>
-      <input [(ngModel)]="registerDetails.password" placeholder="Password"/>
+      <input [(ngModel)]="registerDetails.password" placeholder="Password" type="password"/>
       <input [(ngModel)]="registerDetails.location" placeholder="Location (e.g. Chicago, IL)"/>
       <button (click)="loginOrRegister('register')">Sign up</button>
     </div>

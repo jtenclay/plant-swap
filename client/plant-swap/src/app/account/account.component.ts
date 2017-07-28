@@ -52,6 +52,11 @@ export class AccountComponent {
     })
   }
 
+  swapOutImage($event) {
+  	// change out broken images with a placeholder
+  	$event.target.src = "http://eduevents.in/images/image_not_available.jpg"
+  }
+
   goToDetail(swap) {
 		this.router.navigate(['/swaps', swap.swap.id])
   }

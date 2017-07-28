@@ -38,7 +38,14 @@ export class AppComponent {
 	}
 
 	loginOrRegister(loginOrRegister) {
-		this.http.post('http://localhost:9393/users/' + loginOrRegister, this.userDetails).subscribe(response => {
+		let postObject = new User();
+		if (loginOrRegister == 'login') {
+			postObject = this.userDetails;
+		} else {
+			postObject = this.registerDetails;
+		};
+		console.log(postObject);
+		this.http.post('http://localhost:9393/users/' + loginOrRegister, postObject).subscribe(response => {
       window.localStorage.setItem("loggedIn", "true");
       window.localStorage.setItem("username", response.json().username);
       window.localStorage.setItem("token", response.json().token);
@@ -46,6 +53,8 @@ export class AppComponent {
       this.dataService.loggedIn = true;
       this.dataService.loggedInUser = response.json().username;
       this.dataService.loggedInId = response.json().id;
+      this.registerDetails = new User();
+      this.userDetails = new User();
       // redirect user away from homepage, but if they're already on a list or detail page let them stay there
       if (!window.location.href.match(/swaps/)) {
       	this.router.navigate(['/swaps'])

@@ -7,7 +7,7 @@
 <div id="swaps-list">
 	<button (click)="toggleNewModal()">New swap</button>
 	<div *ngFor="let swap of swaps" class="each-swap">
-		<img src="{{swap.swap.image_url}}">
+		<img src="{{swap.swap.image_url}}" (error)="swapOutImage($event)">
 		<div class="each-swap-info">
 			<h3>{{swap.swap.title}}</h3>
 			<p>{{swap.swap.description}}</p>
